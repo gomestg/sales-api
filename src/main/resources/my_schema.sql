@@ -1,0 +1,33 @@
+CREATE TABLE IF NOT EXISTS client(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    cpf VARCHAR(11)
+);
+
+CREATE TABLE IF NOT EXISTS product(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    price NUMERIC(20,2)
+);
+
+CREATE TABLE IF NOT EXISTS request(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    client_id INTEGER REFERENCES client (id),
+    request_date TIMESTAMP,
+    status VARCHAR(20),
+    total NUMERIC(20,2)
+);
+
+CREATE TABLE IF NOT EXISTS request_item(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    request_id INTEGER REFERENCES request (id),
+    product_id INTEGER REFERENCES product (id),
+    quantity INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS USER(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    login VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    admin BOOL DEFAULT FALSE
+);
